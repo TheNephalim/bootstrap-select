@@ -309,13 +309,13 @@
                         menuHeight = selectOffsetTop - menuExtras;
                     }
                     if ((menu.find('li').length + menu.find('dt').length) > 3) {
-                        minHeight = liHeight*3 + menuExtras - 2;
+                        minHeight = liHeight * 3 + menuExtras - 2;
                     } else {
                         minHeight = 0;
                     }
-                    menu.css({'max-height' : menuHeight + 'px', 'overflow' : 'hidden', 'min-height' : minHeight + 'px'});
-                    menuInner.css({'max-height' : menuHeight - headerHeight- menuPadding + 'px', 'overflow-y' : 'auto', 'min-height' : minHeight - menuPadding + 'px'});
-                }
+                    menu.css({ 'max-height': menuHeight + 'px', 'overflow': 'hidden', 'min-height': minHeight + 'px' });
+                    menuInner.css({ 'max-height': menuHeight - headerHeight - menuPadding + 'px', 'overflow-y': 'auto', 'min-height': minHeight - menuPadding + 'px' });
+                };
                 getSize();
                 $(window).resize(getSize);
                 $(window).scroll(getSize);
@@ -453,7 +453,6 @@
 
             this.$menu.on('click', 'li a', function(e) {
                 var clickedIndex = $(this).parent().index(),
-                    $this = $(this).parent(),
                     prevValue = that.$element.val();
 
                 //Dont close on multi choice menu
@@ -502,7 +501,7 @@
             });
 
             this.$element.change(function() {
-                that.render()
+                that.render();
             });
         },
 
@@ -595,7 +594,7 @@
                     65:"a", 66:"b", 67:"c", 68:"d", 69:"e", 70:"f", 71:"g", 72:"h", 73:"i", 74:"j", 75:"k", 76:"l",
                     77:"m", 78:"n", 79:"o", 80:"p", 81:"q", 82:"r", 83:"s", 84:"t", 85:"u", 86:"v", 87:"w", 88:"x", 89:"y", 90:"z",
                     96:"0", 97:"1", 98:"2", 99:"3", 100:"4", 101:"5", 102:"6", 103:"7", 104:"8", 105:"9"
-                }
+                };
 
                 var keyIndex = [];
 
@@ -688,8 +687,8 @@
         style: 'btn-default',
         size: 'auto',
         title: null,
-        selectedTextFormat : 'values',
-        noneSelectedText : 'Nothing selected',
+        selectedTextFormat: 'values',
+        noneSelectedText: 'Nothing selected',
         countSelectedText: '{0} of {1} selected',
         width: false,
         container: false,
@@ -700,10 +699,10 @@
         dropupAuto: true,
         header: false,
         liveSearch: false
-    }
+    };
 
     $(document)
         .data('keycount', 0)
-        .on('keydown', '[data-toggle=dropdown], [role=menu]' , Selectpicker.prototype.keydown)
+        .on('keydown', '[data-toggle=dropdown], [role=menu]', Selectpicker.prototype.keydown);
 
 }(window.jQuery);
