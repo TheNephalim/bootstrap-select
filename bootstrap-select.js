@@ -172,7 +172,7 @@
                     }
                 } else if ($this.data('divider') == true) {
                     _liA.push('<div class="div-contain"><div class="divider"></div></div>');
-                } else if ($(this).data('hidden') == true) {
+                } else if ($this.data('hidden') == true) {
                     _liA.push('');
                 } else {
                     _liA.push(that.createA(text, optionClass, inline ));
@@ -203,8 +203,9 @@
 
             //Update the LI to match the SELECT
             this.$element.find('option').each(function(index) {
-               that.setDisabled(index, $(this).is(':disabled') || $(this).parent().is(':disabled') );
-               that.setSelected(index, $(this).is(':selected') );
+                var $option = $(this);
+                that.setDisabled(index, $option.is(':disabled') || $option.parent().is(':disabled') );
+                that.setSelected(index, $option.is(':selected') );
             });
 
             var selectedItems = this.$element.find('option:selected').map(function(index,value) {
@@ -371,9 +372,10 @@
                     $drop.css({'top' : pos.top + actualHeight, 'left' : pos.left, 'width' : $element[0].offsetWidth, 'position' : 'absolute'});
                 };
             this.$newElement.on('click', function(e) {
-                getPlacement($(this));
+                var $el = $(this);
+                getPlacement($el);
                 $drop.appendTo(that.options.container);
-                $drop.toggleClass('open', !$(this).hasClass('open'));
+                $drop.toggleClass('open', !$el.hasClass('open'));
                 $drop.append(that.$menu);
             });
             $(window).resize(function() {
@@ -452,8 +454,9 @@
             });
 
             this.$menu.on('click', 'li a', function(e) {
-                var clickedIndex = $(this).parent().index(),
-                    $this = $(this).parent(),
+                var $a = $(this);
+                var clickedIndex = $a.parent().index(),
+                    $this = $a.parent(),
                     prevValue = that.$element.val();
 
                 //Dont close on multi choice menu
@@ -464,7 +467,7 @@
                 e.preventDefault();
 
                 //Dont run if we have been disabled
-                if (!that.isDisabled() && !$(this).parent().hasClass('disabled')) {
+                if (!that.isDisabled() && !$a.parent().hasClass('disabled')) {
                     var $options = that.$element.find('option');
                     var $option = $options.eq(clickedIndex);
 
@@ -600,9 +603,10 @@
                 var keyIndex = [];
 
                 $items.each(function() {
-                    if ($(this).parent().is(':not(.disabled)')) {
-                        if ($.trim($(this).text().toLowerCase()).substring(0,1) == keyCodeMap[e.keyCode]) {
-                            keyIndex.push($(this).parent().index());
+                    var $item = $(this);
+                    if ($item.parent().is(':not(.disabled)')) {
+                        if ($.trim($item.text().toLowerCase()).substring(0,1) == keyCodeMap[e.keyCode]) {
+                            keyIndex.push($item.parent().index());
                         }
                     }
                 });
@@ -649,10 +653,10 @@
        //get the args of the outer function..
        var args = arguments;
        var value;
-       var chain = this.each(function() {
-            if ($(this).is('select')) {
-                var $this = $(this),
-                    data = $this.data('selectpicker'),
+       var chain = this.each(function () {
+           var $this = $(this);
+           if ($this.is('select')) {
+                var data = $this.data('selectpicker'),
                     options = typeof option == 'object' && option;
 
                 if (!data) {
